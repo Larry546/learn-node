@@ -45,7 +45,7 @@ The NodeJS standard library has several operations that are called blocking oper
 
 1. Explore the code in "operations/blocking.js" and "operations/nonblocking.js". For which code will the function moreWork() get executed. Why?
 
-"operations/nonblocking.js", becasue moreWork() will be called whether the file read is successful or not. In "operations/blocking.js" the moreWork() will be called only the file could be read successfully.
+"operations/nonblocking.js", becasue moreWork() will be called whether the file read is successful or not. In "operations/blocking.js" the moreWork() will be called only the file could be read successfully. The readFileSync will block the main thread.
 
 One must be careful when writing concurrent scripts in Node.js. If actions performed in later stages are related to actions related in previous stages or vice-versa then the program will be in an error state.
 For example, consider the code in "operations/syncdelete.js".
