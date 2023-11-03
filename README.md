@@ -62,14 +62,30 @@ When _setTimeout(callback, ms)_ invoked, Node puts a _callback_ in the timer pha
 
 1. In "eventloop/timer.js", what will be the order of execution?
 
+console.log('foo');
+baz();
+console.log('foo');
+baz();
+bar(2);
+bar(1);
+
 2. How many callbacks will the timers phase queue have after the script is run?
+
+2
 
 All I/O operations (e.g., read a file) run in the poll phase. The poll phase performs an I/O operation and puts all callbacks associated with the I/O operation in its queue. When the I/O operation completes, it executes the callbacks in the queue.
 
 **For you to do**:
 
 1. In "eventloop/poll.js", which phase of the event loop will contain callback functions? What will they be?
+
+poll, the readfile event.
+
 2. What will be the execution order?
+
+foo();
+console.log('done');
+fs.readFile('/path/to/file', callback);
 
 The poll phase is actually a blocking phase. If the callback queue associated with it is empty, it blocks the event loop till the earliest scheduled callback in the timers queue.
 
