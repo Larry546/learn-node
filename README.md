@@ -108,6 +108,9 @@ Maybe, not sure.
 **For you to do**:
 
 1. Run the script in "eventloop/immediate.js". What order of execution do you see in terms of the messages being logged.
+
+data from file, console log from setTimeout, console log from setImmediate
+
 2. Change the script such that the immediate callback runs first.
 
 The _process.nextTick()_ API allows us to schedule tasks before the event loop.
