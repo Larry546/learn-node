@@ -118,7 +118,11 @@ The _process.nextTick()_ API allows us to schedule tasks before the event loop.
 **For you to do**:
 
 1. Run the script "eventloop/tick_immediate.js". Explain the order of execution in terms of the messages logged.
+
+main, nextTick, Run Immediately
+
 2. Run the script "eventloop/tick_immediate.js". Why doesn't setTimeout get executed?
+
 3. How does the output change if we replace process.nexTick(cb) with setImmediate(cb)?
 4. Why does the script "eventloop/eventemit.js" not log the event message? Change it such that the event message gets logged.
 
