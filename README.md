@@ -79,21 +79,31 @@ All I/O operations (e.g., read a file) run in the poll phase. The poll phase per
 
 1. In "eventloop/poll.js", which phase of the event loop will contain callback functions? What will they be?
 
-poll, the readfile event.
+poll, the callback of readfile event.
 
 2. What will be the execution order?
 
+```
 foo();
 console.log('done');
 fs.readFile('/path/to/file', callback);
+```
 
 The poll phase is actually a blocking phase. If the callback queue associated with it is empty, it blocks the event loop till the earliest scheduled callback in the timers queue.
 
 **For you to do**:
 
 1. Run the script "eventloop/poll_timer.js". Explain the order of execution in terms of the messages you see in the console.
+
+It calls the `console.log('someAsyncOperation');` first, then calls the callback function of the readFile function. When the event loop enters the poll phase, it has an empty queue (fs.readFile() has not completed), so it will wait for the number of ms remaining until the soonest timer's threshold is reached. While it is waiting 95 ms pass, fs.readFile() finishes reading the file and its callback which takes 10 ms to complete is added to the poll queue and executed. When the callback finishes, there are no more callbacks in the queue, so the event loop will see that the threshold of the soonest timer has been reached then wrap back to the timers phase to execute the timer's callback.
+
 2. Change "Date.now() - startCallback < 10" in line 21 to "Date.now() - startCallback < 150". Will the order of execution change?
+
+No
+
 3. Set timeout to 0. Will the order of execution change?
+
+Maybe, not sure.
 
 **For you to do**:
 
